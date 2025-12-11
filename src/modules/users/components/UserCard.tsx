@@ -1,0 +1,28 @@
+import { FiMail, FiUser } from 'react-icons/fi';
+import { Card, CardContent } from '@/components';
+import type { User } from '../types';
+
+interface UserCardProps {
+  user: User;
+}
+
+export function UserCard({ user }: UserCardProps) {
+  return (
+    <Card className="hover:shadow-md transition-shadow">
+      <CardContent>
+        <div className="flex items-center gap-4">
+          <div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-100 text-blue-600">
+            <FiUser className="h-6 w-6" />
+          </div>
+          <div className="flex-1">
+            <h3 className="font-semibold text-gray-900">{user.name}</h3>
+            <div className="flex items-center gap-1 text-sm text-gray-500">
+              <FiMail className="h-4 w-4" />
+              <span>{user.email}</span>
+            </div>
+          </div>
+        </div>
+      </CardContent>
+    </Card>
+  );
+}
