@@ -1,6 +1,6 @@
 # Structure React
 
-Arquitectura modular con core compartido para proyectos React escalables.
+Arquitectura modular con shared compartido para proyectos React escalables.
 
 ## Stack Tecnológico
 
@@ -19,26 +19,27 @@ Arquitectura modular con core compartido para proyectos React escalables.
 
 ```
 src/
-├── components/                  # Componentes globales reutilizables
-│   ├── ui/                      # Componentes UI primitivos
-│   │   ├── Button.tsx
-│   │   ├── Card.tsx
-│   │   ├── Input.tsx
-│   │   ├── Spinner.tsx
-│   │   └── Loading.tsx
+├── shared/                      # Recursos compartidos de la aplicación
+│   ├── assets/                  # Assets estáticos
+│   │   ├── styles/
+│   │   │   └── index.css        # Estilos globales + Tailwind
+│   │   └── react.svg
 │   │
-│   ├── layouts/                 # Layouts de la aplicación
-│   │   ├── Header.tsx
-│   │   ├── Sidebar.tsx
-│   │   └── MainLayout.tsx
-│   │
-│   └── error/                   # Componentes de error
-│       └── ErrorBoundary.tsx
-│
-├── core/                        # Infraestructura y lógica compartida
-│   ├── api/                     # Configuración de APIs
-│   │   ├── axios.ts             # Cliente HTTP configurado
-│   │   └── queryClient.ts       # Configuración de TanStack Query
+│   ├── components/              # Componentes globales reutilizables
+│   │   ├── ui/                  # Componentes UI primitivos
+│   │   │   ├── Button.tsx
+│   │   │   ├── Card.tsx
+│   │   │   ├── Input.tsx
+│   │   │   ├── Spinner.tsx
+│   │   │   └── Loading.tsx
+│   │   │
+│   │   ├── layouts/             # Layouts de la aplicación
+│   │   │   ├── Header.tsx
+│   │   │   ├── Sidebar.tsx
+│   │   │   └── MainLayout.tsx
+│   │   │
+│   │   └── error/               # Componentes de error
+│   │       └── ErrorBoundary.tsx
 │   │
 │   ├── config/                  # Configuración y constantes
 │   │   ├── env.config.ts        # Variables de entorno
@@ -46,8 +47,10 @@ src/
 │   │
 │   ├── hooks/                   # Hooks globales reutilizables
 │   │
-│   ├── routes/                  # Configuración de React Router
-│   │   └── index.tsx            # Definición de rutas
+│   ├── lib/                     # Infraestructura técnica
+│   │   └── api/                 # Configuración de APIs
+│   │       ├── axios.ts         # Cliente HTTP configurado
+│   │       └── queryClient.ts   # Configuración de TanStack Query
 │   │
 │   ├── stores/                  # Estado global (Zustand)
 │   │   ├── useAppStore.ts       # Tema, sidebar, config UI
@@ -57,9 +60,14 @@ src/
 │   │   ├── api.types.ts         # ApiResponse, PaginatedResponse
 │   │   └── common.types.ts      # Status, tipos genéricos
 │   │
-│   └── utils/                   # Utilidades
-│       ├── cn.ts                # Classnames helper
-│       └── formatters.ts        # Formateo de fechas, moneda
+│   ├── utils/                   # Utilidades
+│   │   ├── cn.ts                # Classnames helper
+│   │   └── formatters.ts        # Formateo de fechas, moneda
+│   │
+│   └── index.ts                 # Barrel export de todo shared
+│
+├── routes/                      # Configuración de React Router
+│   └── index.tsx                # Definición de rutas
 │
 ├── modules/                     # Features de negocio (autocontenidos)
 │   └── [feature]/
@@ -83,46 +91,43 @@ src/
 │       ├── TodoShowPage.tsx     # /todos/:id
 │       └── TodoEditPage.tsx     # /todos/:id/edit
 │
-├── assets/
-│   └── styles/
-│       └── index.css            # Estilos globales + Tailwind
-│
 ├── App.tsx                      # Componente raíz
 └── main.tsx                     # Entry point
 ```
 
 ## Arquitectura
 
-### Components (`/components`)
+### Shared (`/shared`)
 
-Componentes visuales reutilizables en toda la aplicación:
-
-- **ui/**: Primitivos de UI (Button, Card, Input, Spinner, Loading)
-- **layouts/**: Estructura de la app (Header, Sidebar, MainLayout)
-- **error/**: Manejo de errores (ErrorBoundary)
+Recursos compartidos en toda la aplicación. Todo se exporta desde un único barrel:
 
 ```tsx
-import { Button, Card, Loading } from '@/components';
-import { MainLayout } from '@/components/layouts';
+import {
+  // Components
+  Button, Card, Loading, MainLayout, ErrorBoundary,
+  // Stores
+  useAppStore, useAuthStore,
+  // Utils
+  cn, formatDate, formatCurrency,
+  // Config
+  APP_NAME, ROUTES, API_ENDPOINTS,
+  // API
+  apiClient, queryClient,
+  // Assets
+  ReactLogo,
+} from '@/shared';
 ```
 
-### Core (`/core`)
+Contenido:
 
-Infraestructura y lógica compartida que no es visual:
-
-- **api/**: Clientes HTTP (axios, queryClient)
+- **components/**: UI reutilizable (Button, Card, Input, layouts, ErrorBoundary)
 - **config/**: Variables de entorno y constantes
 - **hooks/**: Hooks globales (useLocalStorage, useDebounce)
+- **lib/api/**: Clientes HTTP (axios, queryClient)
 - **stores/**: Estado global con Zustand
 - **types/**: Tipos TypeScript compartidos
 - **utils/**: Funciones utilitarias
-
-```tsx
-import { apiClient, queryClient } from '@/core/api';
-import { useAppStore, useAuthStore } from '@/core/stores';
-import { cn, formatDate } from '@/core/utils';
-import { APP_NAME, ROUTES } from '@/core/config';
-```
+- **assets/**: Estilos y recursos estáticos
 
 ### Modules (`/modules`)
 
@@ -169,7 +174,7 @@ export function UsersPage() {
                               ▼
 ┌─────────────────────────────────────────────────────────────┐
 │                         Pages                                │
-│  (Composición - importa de modules y components)            │
+│  (Composición - importa de modules y shared)                │
 └─────────────────────────────────────────────────────────────┘
                               │
                               ▼
@@ -181,10 +186,10 @@ export function UsersPage() {
 └─────────────────────────────────────────────────────────────┘
                               │
                               ▼
-┌───────────────────────────────┬─────────────────────────────┐
-│          Components           │            Core              │
-│  (UI reutilizable)            │  (Infraestructura)          │
-└───────────────────────────────┴─────────────────────────────┘
+┌─────────────────────────────────────────────────────────────┐
+│                         Shared                               │
+│  (Components, Stores, Utils, Config, API, Types, Assets)    │
+└─────────────────────────────────────────────────────────────┘
 ```
 
 ## Crear un Nuevo Módulo
@@ -216,7 +221,7 @@ export const productSchema = z.object({
 export type ProductFormData = z.infer<typeof productSchema>;
 
 // services/product.service.ts
-import { apiClient } from '@/core/api';
+import { apiClient } from '@/shared';
 import type { Product } from '../types';
 
 export const productService = {
@@ -238,7 +243,7 @@ export const useProducts = () => {
 };
 
 // components/ProductList.tsx
-import { Loading } from '@/components';
+import { Loading } from '@/shared';
 import { useProducts } from '../hooks';
 
 export function ProductList() {
@@ -254,7 +259,7 @@ export function ProductList() {
 // components/ProductForm.tsx
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Button, Input } from '@/components';
+import { Button, Input } from '@/shared';
 import { productSchema, type ProductFormData } from '../schemas';
 
 export function ProductForm() {
@@ -303,14 +308,16 @@ pnpm lint        # Lint
 
 | Necesito... | Ubicación |
 |-------------|-----------|
-| Componente UI reutilizable | `components/ui/` |
-| Layout de la app | `components/layouts/` |
-| Manejo de errores | `components/error/` |
-| Hook global | `core/hooks/` |
-| Estado global | `core/stores/` |
-| Configuración/constantes | `core/config/` |
-| Tipos compartidos | `core/types/` |
-| Utilidades | `core/utils/` |
+| Componente UI reutilizable | `shared/components/ui/` |
+| Layout de la app | `shared/components/layouts/` |
+| Manejo de errores | `shared/components/error/` |
+| Hook global | `shared/hooks/` |
+| Estado global | `shared/stores/` |
+| Configuración/constantes | `shared/config/` |
+| Tipos compartidos | `shared/types/` |
+| Utilidades | `shared/utils/` |
+| Cliente API | `shared/lib/api/` |
+| Assets/estilos | `shared/assets/` |
 | Feature completa | `modules/[feature]/` |
 | Validación de formularios | `modules/[feature]/schemas/` |
 | Página/vista | `pages/` |

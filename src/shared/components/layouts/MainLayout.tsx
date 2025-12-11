@@ -1,8 +1,8 @@
 import { Outlet } from 'react-router-dom';
 import { Header } from './Header.tsx';
 import { Sidebar } from './Sidebar.tsx';
-import { useAppStore } from '@/core/stores';
-import { cn } from '@/core/utils';
+import { useAppStore } from '@/shared/stores';
+import { cn } from '@/shared/utils';
 
 export function MainLayout() {
   const { sidebarOpen } = useAppStore();

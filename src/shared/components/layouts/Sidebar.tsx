@@ -1,8 +1,8 @@
 import { NavLink } from 'react-router-dom';
 import { FiHome, FiUsers, FiCheckSquare } from 'react-icons/fi';
-import { useAppStore } from '@/core/stores';
-import { cn } from '@/core/utils';
-import { ROUTES } from '@/core/config';
+import { useAppStore } from '@/shared/stores';
+import { cn } from '@/shared/utils';
+import { ROUTES } from '@/shared/config';
 
 interface NavItem {
   label: string;

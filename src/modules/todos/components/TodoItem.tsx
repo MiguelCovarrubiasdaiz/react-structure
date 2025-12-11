@@ -1,5 +1,5 @@
 import { FiCheck, FiCircle, FiTrash2 } from 'react-icons/fi';
-import { Button, cn } from '@/core';
+import { Button, cn } from '@/shared/lib';
 import { useToggleTodo, useDeleteTodo } from '../hooks';
 import type { Todo } from '../types';
 

@@ -1,5 +1,5 @@
 import { FiUsers, FiCheckSquare, FiBox } from 'react-icons/fi';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components';
+import { Card, CardContent, CardHeader, CardTitle } from '@/shared/components';
 
 const features = [
   {
@@ -55,19 +55,18 @@ export function HomePage() {
         <CardContent>
           <pre className="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto text-sm">
             {`src/
-├── components/              # Componentes globales
-│   ├── ui/                  # Button, Card, Input, etc.
-│   ├── layouts/             # Header, Sidebar, MainLayout
-│   └── error/               # ErrorBoundary
-│
-├── core/                    # Infraestructura compartida
-│   ├── api/                 # axios, queryClient
+├── shared/                  # Recursos compartidos
+│   ├── assets/              # estilos, imágenes
+│   ├── components/          # ui/, layouts/, error/
 │   ├── config/              # env, constants
 │   ├── hooks/               # hooks globales
-│   ├── routes/              # configuración de rutas
+│   ├── lib/api/             # axios, queryClient
 │   ├── stores/              # stores globales (auth, app)
 │   ├── types/               # tipos compartidos
-│   └── utils/               # cn, formatters
+│   ├── utils/               # cn, formatters
+│   └── index.ts             # barrel export
+│
+├── routes/                  # Configuración de rutas
 │
 ├── modules/                 # Features del negocio
 │   └── [feature]/
@@ -84,7 +83,6 @@ export function HomePage() {
 │       ├── FeatureShowPage.tsx    # Detalle
 │       └── FeatureEditPage.tsx    # Editar
 │
-├── assets/
 ├── App.tsx
 └── main.tsx`}
           </pre>

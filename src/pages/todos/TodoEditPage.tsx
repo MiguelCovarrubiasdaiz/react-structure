@@ -7,7 +7,7 @@ import {
   CardHeader,
   CardTitle,
   Loading,
-} from '@/components';
+} from '@/shared/components';
 import { useTodo } from '@/modules/todos';
 
 export function TodoEditPage() {

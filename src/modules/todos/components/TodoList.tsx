@@ -1,4 +1,4 @@
-import { Loading } from '@/components';
+import { Loading } from '@/shared/components';
 import { useTodos } from '../hooks';
 import { TodoItem } from './TodoItem';
 

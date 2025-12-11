@@ -1,6 +1,12 @@
 import { useNavigate } from 'react-router-dom';
 import { FiArrowLeft } from 'react-icons/fi';
-import { Button, Card, CardContent, CardHeader, CardTitle } from '@/components';
+import {
+  Button,
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from '@/shared/components';
 import { UserForm } from '@/modules/users';
 
 export function UserCreatePage() {

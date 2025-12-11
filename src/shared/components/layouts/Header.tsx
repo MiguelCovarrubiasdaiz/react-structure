@@ -1,7 +1,7 @@
 import { FiMenu, FiMoon, FiSun } from 'react-icons/fi';
-import { useAppStore } from '@/core/stores';
-import { Button } from '@/components';
-import { APP_NAME } from '@/core/config';
+import { useAppStore } from '@/shared/stores';
+import { Button } from '@/shared/components';
+import { APP_NAME } from '@/shared/config';
 
 export function Header() {
   const { theme, toggleTheme, toggleSidebar } = useAppStore();
