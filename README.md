@@ -283,10 +283,10 @@ export * from './types';
 ## Scripts
 
 ```bash
-npm run dev      # Desarrollo
-npm run build    # Build producción
-npm test         # Tests
-npm run lint     # Lint
+pnpm dev         # Desarrollo
+pnpm build       # Build producción
+pnpm test        # Tests
+pnpm lint        # Lint
 ```
 
 ## Convenciones
