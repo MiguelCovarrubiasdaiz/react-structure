@@ -7,9 +7,9 @@ import {
   CardHeader,
   CardTitle,
   Loading,
-} from '@/components';
+} from '@/shared/components';
 import { useTodo } from '@/modules/todos';
-import { cn } from '@/core/utils';
+import { cn } from '@/shared/utils';
 
 export function TodoShowPage() {
   const { id } = useParams<{ id: string }>();

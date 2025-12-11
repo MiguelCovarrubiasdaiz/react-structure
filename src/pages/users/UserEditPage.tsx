@@ -7,7 +7,7 @@ import {
   CardHeader,
   CardTitle,
   Loading,
-} from '@/components';
+} from '@/shared/components';
 import { useUser } from '@/modules/users';
 
 export function UserEditPage() {

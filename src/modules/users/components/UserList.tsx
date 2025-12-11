@@ -1,4 +1,4 @@
-import { Loading } from '@/components';
+import { Loading } from '@/shared/components';
 import { useUsers } from '../hooks';
 import { UserCard } from './UserCard';
 

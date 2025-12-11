@@ -1,4 +1,4 @@
-import { apiClient, API_ENDPOINTS } from '@/core';
+import { apiClient, API_ENDPOINTS } from '@/shared/lib';
 import type { User } from '../types';
 
 export const userService = {

@@ -1,5 +1,5 @@
 import { createBrowserRouter } from 'react-router-dom';
-import { MainLayout } from '@/components/layouts';
+import { MainLayout } from '@/shared/components/layouts';
 import { HomePage } from '@/pages/home';
 
 import {
@@ -73,4 +73,4 @@ export const router = createBrowserRouter([
   },
 ]);
 
-export { ROUTES } from '@/core/config';
+export { ROUTES } from '@/shared/config';

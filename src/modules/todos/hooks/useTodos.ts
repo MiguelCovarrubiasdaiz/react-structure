@@ -1,5 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { QUERY_KEYS } from '@/core';
+import { QUERY_KEYS } from '@/shared/lib';
 import { todoService } from '../services';
 import type { Todo } from '../types';
 

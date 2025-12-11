@@ -10,7 +10,7 @@ export {
   PAGINATION,
   API_ENDPOINTS,
   QUERY_KEYS,
-} from './config';
+} from '../config';
 
 // Components (UI, Layouts, Error)
 export {
@@ -30,10 +30,10 @@ export {
 } from '../components';
 
 // Stores
-export { useAppStore, useAuthStore } from './stores';
+export { useAppStore, useAuthStore } from '../stores';
 
 // Types
-export * from './types';
+export * from '../types';
 
 // Utils
-export { cn, formatDate, formatCurrency, truncateText } from './utils';
+export { cn, formatDate, formatCurrency, truncateText } from '../utils';

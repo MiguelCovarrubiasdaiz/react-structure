@@ -78,7 +78,7 @@ const generalConfig = {
                 map: [
                     ['@/components', './src/components'],
                     ['@/hooks', './src/hooks'],
-                    ['@/core', './src/core'],
+                    ['@/lib', './src/lib'],
                     ['@/assets', './src/assets'],
                     ['@/pages', './src/pages'],
                     ['@/routes', './src/routes'],

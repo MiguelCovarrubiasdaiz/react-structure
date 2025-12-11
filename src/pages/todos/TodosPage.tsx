@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { FiPlus } from 'react-icons/fi';
-import { Button } from '@/components';
+import { Button } from '@/shared/components';
 import { TodoList } from '@/modules/todos';
 
 export function TodosPage() {

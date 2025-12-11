@@ -1,4 +1,4 @@
-import { cn } from '@/core/utils';
+import { cn } from '@/shared/utils';
 
 type SpinnerSize = 'sm' | 'md' | 'lg';
 

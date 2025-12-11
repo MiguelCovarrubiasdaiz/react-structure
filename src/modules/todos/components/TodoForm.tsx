@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Button, Input } from '@/components';
+import { Button, Input } from '@/shared/components';
 import { createTodoSchema, type CreateTodoFormData } from '../schemas';
 import { useCreateTodo } from '../hooks';
 

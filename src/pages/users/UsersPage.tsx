@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { FiPlus } from 'react-icons/fi';
-import { Button } from '@/components';
+import { Button } from '@/shared/components';
 import { UserList } from '@/modules/users';
 
 export function UsersPage() {
