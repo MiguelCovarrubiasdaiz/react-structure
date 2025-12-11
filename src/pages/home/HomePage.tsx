@@ -5,8 +5,7 @@ const features = [
   {
     icon: <FiBox className="h-8 w-8" />,
     title: 'Arquitectura Modular',
-    description:
-      'Estructura de carpetas organizada por módulos para escalar fácilmente.',
+    description: 'Estructura de carpetas organizada',
   },
   {
     icon: <FiUsers className="h-8 w-8" />,

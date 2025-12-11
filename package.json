@@ -13,7 +13,8 @@
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json,css,md}\"",
     "lint:fix": "eslint . --fix --ignore-pattern '**/*.test.tsx' --ignore-pattern 'coverage/**/*'",
     "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage"
+    "test:coverage": "jest --coverage",
+    "test:ci": "jest --ci --passWithNoTests"
   },
   "dependencies": {
     "@commitlint/types": "^20.2.0",
@@ -31,6 +32,8 @@
     "zustand": "^5.0.9"
   },
   "devDependencies": {
+    "@commitlint/cli": "^20.2.0",
+    "@commitlint/config-conventional": "^20.2.0",
     "@eslint/js": "^9.39.1",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.0",
