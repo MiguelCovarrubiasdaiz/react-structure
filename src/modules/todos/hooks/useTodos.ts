@@ -1,7 +1,7 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { QUERY_KEYS } from '@/shared/lib';
 import { todoService } from '../services';
-import type { Todo } from '../types';
+import type { CreateTodo, UpdateTodo } from '../types';
 
 export const useTodos = () => {
   return useQuery({
@@ -22,7 +22,7 @@ export const useCreateTodo = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (todo: Omit<Todo, 'id'>) => todoService.create(todo),
+    mutationFn: (todo: CreateTodo) => todoService.create(todo),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.TODOS });
     },
@@ -33,7 +33,7 @@ export const useUpdateTodo = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: ({ id, todo }: { id: string; todo: Partial<Todo> }) =>
+    mutationFn: ({ id, todo }: { id: string; todo: UpdateTodo }) =>
       todoService.update(id, todo),
     onSuccess: (_, { id }) => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.TODOS });

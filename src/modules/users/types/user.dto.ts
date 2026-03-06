@@ -1,20 +1,20 @@
-// Modelo de dominio - Usado en la aplicación
+// DTOs - Representan la estructura de datos de la API
 
-export interface User {
+export interface UserDTO {
   id: string;
   name: string;
   email: string;
   avatar?: string;
-  createdAt: Date;
+  createdAt: string;
 }
 
-export interface CreateUser {
+export interface CreateUserDTO {
   name: string;
   email: string;
   avatar?: string;
 }
 
-export interface UpdateUser {
+export interface UpdateUserDTO {
   name?: string;
   email?: string;
   avatar?: string;
