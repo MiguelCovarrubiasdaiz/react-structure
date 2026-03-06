@@ -73,9 +73,10 @@ src/
 │   └── [feature]/
 │       ├── components/          # Componentes del módulo
 │       ├── hooks/               # Hooks de datos
+│       ├── mappers/             # Transformación DTO ↔ Domain
 │       ├── schemas/             # Validaciones Zod
 │       ├── services/            # Llamadas API
-│       └── types/               # Tipos del dominio
+│       └── types/               # Tipos del dominio + DTOs
 │
 ├── pages/                       # Páginas organizadas por feature
 │   ├── home/
@@ -137,13 +138,16 @@ Cada módulo es **autocontenido** y representa una feature de negocio:
 modules/users/
 ├── components/     # UI específica del módulo
 ├── hooks/          # Lógica de datos (queries, mutations)
+├── mappers/        # Transformación DTO ↔ Domain
 ├── schemas/        # Validaciones Zod + tipos de formularios
 ├── services/       # Llamadas a la API
-└── types/          # Tipos del dominio
+└── types/
+    ├── user.types.ts   # Modelo de dominio (User, CreateUser, UpdateUser)
+    └── user.dto.ts     # DTOs de API (UserDTO, CreateUserDTO, UpdateUserDTO)
 ```
 
 ```tsx
-import { UserList, useUsers, userService } from '@/modules/users';
+import { UserList, useUsers, userService, userMapper } from '@/modules/users';
 ```
 
 ### Pages (`/pages`)
@@ -181,7 +185,8 @@ export function UsersPage() {
 ┌─────────────────────────────────────────────────────────────┐
 │                        Modules                               │
 │  ┌──────────────────────────────────────────────────────┐   │
-│  │ Components ──► Hooks ──► Services ──► API (axios)    │   │
+│  │ Components ──► Hooks ──► Services ──► Mappers ──► API│   │
+│  │                                  DTO ◄──► Domain     │   │
 │  └──────────────────────────────────────────────────────┘   │
 └─────────────────────────────────────────────────────────────┘
                               │
@@ -197,15 +202,34 @@ export function UsersPage() {
 1. Crear la estructura:
 
 ```bash
-mkdir -p src/modules/products/{components,hooks,schemas,services,types}
+mkdir -p src/modules/products/{components,hooks,mappers,schemas,services,types}
 ```
 
 2. Crear los archivos:
 
 ```tsx
-// types/product.types.ts
+// types/product.types.ts - Modelo de dominio
 export interface Product {
   id: string;
+  name: string;
+  price: number;
+  createdAt: Date;
+}
+
+export interface CreateProduct {
+  name: string;
+  price: number;
+}
+
+// types/product.dto.ts - DTOs de API
+export interface ProductDTO {
+  id: string;
+  name: string;
+  price: number;
+  createdAt: string;
+}
+
+export interface CreateProductDTO {
   name: string;
   price: number;
 }
@@ -220,25 +244,65 @@ export const productSchema = z.object({
 
 export type ProductFormData = z.infer<typeof productSchema>;
 
+// mappers/product.mapper.ts
+import type { Product, CreateProduct } from '../types/product.types';
+import type { ProductDTO, CreateProductDTO } from '../types/product.dto';
+
+export const productMapper = {
+  toDomain: (dto: ProductDTO): Product => ({
+    id: dto.id,
+    name: dto.name,
+    price: dto.price,
+    createdAt: new Date(dto.createdAt),
+  }),
+
+  toDomainList: (dtos: ProductDTO[]): Product[] => dtos.map(productMapper.toDomain),
+
+  toCreateDTO: (product: CreateProduct): CreateProductDTO => ({
+    name: product.name,
+    price: product.price,
+  }),
+};
+
 // services/product.service.ts
 import { apiClient } from '@/shared';
-import type { Product } from '../types';
+import type { Product, CreateProduct } from '../types/product.types';
+import type { ProductDTO } from '../types/product.dto';
+import { productMapper } from '../mappers';
 
 export const productService = {
   getAll: async (): Promise<Product[]> => {
-    const { data } = await apiClient.get('/products');
-    return data;
+    const { data } = await apiClient.get<ProductDTO[]>('/products');
+    return productMapper.toDomainList(data);
+  },
+
+  create: async (product: CreateProduct): Promise<Product> => {
+    const dto = productMapper.toCreateDTO(product);
+    const { data } = await apiClient.post<ProductDTO>('/products', dto);
+    return productMapper.toDomain(data);
   },
 };
 
 // hooks/useProducts.ts
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { productService } from '../services';
+import type { CreateProduct } from '../types';
 
 export const useProducts = () => {
   return useQuery({
     queryKey: ['products'],
     queryFn: productService.getAll,
+  });
+};
+
+export const useCreateProduct = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (product: CreateProduct) => productService.create(product),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['products'] });
+    },
   });
 };
 
@@ -280,6 +344,7 @@ export function ProductForm() {
 // index.ts
 export * from './components';
 export * from './hooks';
+export * from './mappers';
 export * from './schemas';
 export * from './services';
 export * from './types';
@@ -300,8 +365,10 @@ pnpm lint        # Lint
 |------|------------|---------|
 | Componentes | PascalCase | `UserCard.tsx` |
 | Hooks | camelCase + `use` | `useUsers.ts` |
+| Mappers | camelCase + `.mapper` | `user.mapper.ts` |
 | Services | camelCase + `.service` | `user.service.ts` |
-| Types | camelCase + `.types` | `user.types.ts` |
+| Types (dominio) | camelCase + `.types` | `user.types.ts` |
+| Types (API) | camelCase + `.dto` | `user.dto.ts` |
 | Stores | camelCase + `use` | `useAuthStore.ts` |
 
 ## Cuándo usar cada capa
@@ -319,5 +386,6 @@ pnpm lint        # Lint
 | Cliente API | `shared/lib/api/` |
 | Assets/estilos | `shared/assets/` |
 | Feature completa | `modules/[feature]/` |
+| Transformación DTO ↔ Domain | `modules/[feature]/mappers/` |
 | Validación de formularios | `modules/[feature]/schemas/` |
 | Página/vista | `pages/` |
