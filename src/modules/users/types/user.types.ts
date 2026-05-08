@@ -19,3 +19,11 @@ export interface UpdateUser {
   email?: string;
   avatar?: string;
 }
+
+export interface UserCardProps {
+  user: User;
+}
+
+export interface UserFormProps {
+  onSuccess?: () => void;
+}

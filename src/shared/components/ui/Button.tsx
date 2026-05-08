@@ -1,17 +1,5 @@
-import type { ButtonHTMLAttributes, ReactNode } from 'react';
 import { cn } from '@/shared/utils';
-
-type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger';
-type ButtonSize = 'sm' | 'md' | 'lg';
-
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  children: ReactNode;
-  variant?: ButtonVariant;
-  size?: ButtonSize;
-  isLoading?: boolean;
-  leftIcon?: ReactNode;
-  rightIcon?: ReactNode;
-}
+import type { ButtonVariant, ButtonSize, ButtonProps } from '@/shared/types';
 
 const variantStyles: Record<ButtonVariant, string> = {
   primary: 'bg-blue-500 text-white hover:bg-blue-600 disabled:bg-blue-300',

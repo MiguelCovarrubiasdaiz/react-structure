@@ -1,11 +1,7 @@
 import { FiCheck, FiCircle, FiTrash2 } from 'react-icons/fi';
 import { Button, cn } from '@/shared/lib';
 import { useToggleTodo, useDeleteTodo } from '../hooks';
-import type { Todo } from '../types';
-
-interface TodoItemProps {
-  todo: Todo;
-}
+import type { TodoItemProps } from '../types';
 
 export function TodoItem({ todo }: TodoItemProps) {
   const toggleMutation = useToggleTodo();

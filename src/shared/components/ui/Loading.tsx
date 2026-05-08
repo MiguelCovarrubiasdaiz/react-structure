@@ -1,9 +1,5 @@
 import { Spinner } from './Spinner.tsx';
-
-interface LoadingProps {
-  text?: string;
-  fullScreen?: boolean;
-}
+import type { LoadingProps } from '@/shared/types';
 
 export function Loading({
   text = 'Loading...',

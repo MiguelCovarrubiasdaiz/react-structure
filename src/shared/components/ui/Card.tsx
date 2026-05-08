@@ -1,9 +1,11 @@
-import type { HTMLAttributes, ReactNode } from 'react';
 import { cn } from '@/shared/utils';
-
-interface CardProps extends HTMLAttributes<HTMLDivElement> {
-  children: ReactNode;
-}
+import type {
+  CardProps,
+  CardHeaderProps,
+  CardTitleProps,
+  CardContentProps,
+  CardFooterProps,
+} from '@/shared/types';
 
 export function Card({ children, className, ...props }: CardProps) {
   return (
@@ -19,20 +21,12 @@ export function Card({ children, className, ...props }: CardProps) {
   );
 }
 
-interface CardHeaderProps extends HTMLAttributes<HTMLDivElement> {
-  children: ReactNode;
-}
-
 export function CardHeader({ children, className, ...props }: CardHeaderProps) {
   return (
     <div className={cn('px-6 pt-6', className)} {...props}>
       {children}
     </div>
   );
-}
-
-interface CardTitleProps extends HTMLAttributes<HTMLHeadingElement> {
-  children: ReactNode;
 }
 
 export function CardTitle({ children, className, ...props }: CardTitleProps) {
@@ -46,10 +40,6 @@ export function CardTitle({ children, className, ...props }: CardTitleProps) {
   );
 }
 
-interface CardContentProps extends HTMLAttributes<HTMLDivElement> {
-  children: ReactNode;
-}
-
 export function CardContent({
   children,
   className,
@@ -60,10 +50,6 @@ export function CardContent({
       {children}
     </div>
   );
-}
-
-interface CardFooterProps extends HTMLAttributes<HTMLDivElement> {
-  children: ReactNode;
 }
 
 export function CardFooter({ children, className, ...props }: CardFooterProps) {
