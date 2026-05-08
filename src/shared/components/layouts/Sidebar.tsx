@@ -3,12 +3,7 @@ import { FiHome, FiUsers, FiCheckSquare } from 'react-icons/fi';
 import { useAppStore } from '@/shared/stores';
 import { cn } from '@/shared/utils';
 import { ROUTES } from '@/shared/config';
-
-interface NavItem {
-  label: string;
-  to: string;
-  icon: React.ReactNode;
-}
+import type { NavItem } from '@/shared/types';
 
 const navItems: NavItem[] = [
   { label: 'Home', to: ROUTES.HOME, icon: <FiHome className="h-5 w-5" /> },

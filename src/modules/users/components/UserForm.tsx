@@ -3,10 +3,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Input } from '@/shared/components';
 import { createUserSchema, type CreateUserFormData } from '../schemas';
 import { useCreateUser } from '../hooks';
-
-interface UserFormProps {
-  onSuccess?: () => void;
-}
+import type { UserFormProps } from '../types';
 
 export function UserForm({ onSuccess }: UserFormProps) {
   const createUser = useCreateUser();

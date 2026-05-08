@@ -3,11 +3,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Input } from '@/shared/components';
 import { createTodoSchema, type CreateTodoFormData } from '../schemas';
 import { useCreateTodo } from '../hooks';
-
-interface TodoFormProps {
-  userId?: string;
-  onSuccess?: () => void;
-}
+import type { TodoFormProps } from '../types';
 
 export function TodoForm({ userId = '1', onSuccess }: TodoFormProps) {
   const createTodo = useCreateTodo();

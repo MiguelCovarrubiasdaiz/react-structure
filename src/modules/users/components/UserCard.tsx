@@ -1,10 +1,6 @@
 import { FiMail, FiUser } from 'react-icons/fi';
 import { Card, CardContent } from '@/shared/components';
-import type { User } from '../types';
-
-interface UserCardProps {
-  user: User;
-}
+import type { UserCardProps } from '../types';
 
 export function UserCard({ user }: UserCardProps) {
   return (

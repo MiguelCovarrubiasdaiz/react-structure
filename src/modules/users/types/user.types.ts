@@ -5,3 +5,11 @@ export interface User {
   avatar?: string;
   createdAt: string;
 }
+
+export interface UserCardProps {
+  user: User;
+}
+
+export interface UserFormProps {
+  onSuccess?: () => void;
+}
