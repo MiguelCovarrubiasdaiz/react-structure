@@ -19,8 +19,8 @@ export function UserCreatePage() {
           <FiArrowLeft className="h-5 w-5" />
         </Button>
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Crear Usuario</h1>
-          <p className="text-gray-600 mt-1">
+          <h1 className="text-3xl font-bold text-foreground">Crear Usuario</h1>
+          <p className="text-muted-foreground mt-1">
             Agrega un nuevo usuario al sistema
           </p>
         </div>

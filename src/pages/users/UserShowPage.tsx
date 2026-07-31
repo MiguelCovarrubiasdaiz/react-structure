@@ -42,8 +42,8 @@ export function UserShowPage() {
             <FiArrowLeft className="h-5 w-5" />
           </Button>
           <div>
-            <h1 className="text-3xl font-bold text-gray-900">{user.name}</h1>
-            <p className="text-gray-600 mt-1">Detalles del usuario</p>
+            <h1 className="text-3xl font-bold text-foreground">{user.name}</h1>
+            <p className="text-muted-foreground mt-1">Detalles del usuario</p>
           </div>
         </div>
         <Link to={`/users/${id}/edit`}>
@@ -59,12 +59,12 @@ export function UserShowPage() {
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-100 text-blue-600">
+            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary">
               <FiUser className="h-5 w-5" />
             </div>
             <div>
-              <p className="text-sm text-gray-500">Nombre</p>
-              <p className="font-medium text-gray-900">{user.name}</p>
+              <p className="text-sm text-muted-foreground">Nombre</p>
+              <p className="font-medium text-foreground">{user.name}</p>
             </div>
           </div>
 
@@ -73,8 +73,8 @@ export function UserShowPage() {
               <FiMail className="h-5 w-5" />
             </div>
             <div>
-              <p className="text-sm text-gray-500">Email</p>
-              <p className="font-medium text-gray-900">{user.email}</p>
+              <p className="text-sm text-muted-foreground">Email</p>
+              <p className="font-medium text-foreground">{user.email}</p>
             </div>
           </div>
         </CardContent>

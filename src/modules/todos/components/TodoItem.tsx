@@ -16,14 +16,14 @@ export function TodoItem({ todo }: TodoItemProps) {
   };
 
   return (
-    <div className="flex items-center gap-3 rounded-lg border border-gray-200 bg-white p-4 transition-shadow hover:shadow-sm">
+    <div className="flex items-center gap-3 rounded-lg border border-border bg-card p-4 transition-shadow hover:shadow-sm">
       <button
         onClick={handleToggle}
         className={cn(
           'flex h-6 w-6 items-center justify-center rounded-full border-2 transition-colors',
           todo.completed
             ? 'border-green-500 bg-green-500 text-white'
-            : 'border-gray-300 hover:border-blue-500'
+            : 'border-border hover:border-primary'
         )}
         disabled={toggleMutation.isPending}
       >
@@ -33,8 +33,8 @@ export function TodoItem({ todo }: TodoItemProps) {
 
       <span
         className={cn(
-          'flex-1 text-gray-900',
-          todo.completed && 'text-gray-400 line-through'
+          'flex-1 text-foreground',
+          todo.completed && 'text-muted-foreground line-through'
         )}
       >
         {todo.title}

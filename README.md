@@ -11,6 +11,7 @@ Stop reinventing the wheel every time you start a new React project. This boiler
 | **Framework** | React 19 + TypeScript |
 | **Build Tool** | Vite 7 |
 | **Styling** | TailwindCSS 4 |
+| **UI Components** | shadcn/ui (new-york) + Radix UI + Lucide icons |
 | **Data Fetching** | TanStack Query v5 |
 | **State Management** | Zustand |
 | **HTTP Client** | Axios |
@@ -49,12 +50,10 @@ src/
 │   │   └── react.svg
 │   │
 │   ├── components/              # Global reusable components
-│   │   ├── ui/                  # Primitive UI components
-│   │   │   ├── Button.tsx
-│   │   │   ├── Card.tsx
-│   │   │   ├── Input.tsx
-│   │   │   ├── Spinner.tsx
-│   │   │   └── Loading.tsx
+│   │   ├── ui/                  # shadcn/ui primitives (button, card, input,
+│   │   │   │                    #   dialog, select, table, form, sonner, ...)
+│   │   │   ├── spinner.tsx      # Template extras
+│   │   │   └── loading.tsx
 │   │   │
 │   │   ├── layouts/             # Application layouts
 │   │   │   ├── Header.tsx
@@ -166,6 +165,24 @@ import {
   apiClient, queryClient,
 } from '@/shared';
 ```
+
+### UI Components (shadcn/ui)
+
+The `ui/` folder contains [shadcn/ui](https://ui.shadcn.com) primitives (new-york style, neutral base color, CSS variables) configured via `components.json`. Installed: `button`, `card`, `input`, `textarea`, `label`, `badge`, `skeleton`, `separator`, `dialog`, `dropdown-menu`, `select`, `checkbox`, `avatar`, `table`, `form`, `sonner` — plus template extras `Spinner` and `Loading`.
+
+```bash
+# Add more components (they land in src/shared/components/ui/)
+pnpm dlx shadcn@latest add <component>
+```
+
+Then re-export from `src/shared/components/ui/index.ts` and run `pnpm format`.
+
+- Theme tokens (light + dark) live in `src/shared/assets/styles/index.css`. Style with semantic tokens (`bg-background`, `text-foreground`, `text-muted-foreground`, `border-border`, …) instead of raw `gray-*`/`blue-*` classes.
+- Dark mode is class-based (`.dark` on `<html>`), toggled via `useAppStore` and applied in `App.tsx`.
+- `Button` adds `isLoading`, `leftIcon` and `rightIcon` on top of the shadcn API.
+- Toasts: `<Toaster />` is mounted in `App.tsx` — call `toast.success(...)` / `toast.error(...)` from `sonner`.
+
+> **Working with AI agents?** See [AGENTS.md](AGENTS.md) for conventions, commands and step-by-step recipes.
 
 ### Modules (`src/modules/`)
 

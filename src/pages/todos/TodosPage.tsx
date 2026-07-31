@@ -8,8 +8,8 @@ export function TodosPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Todos</h1>
-          <p className="text-gray-600 mt-1">
+          <h1 className="text-3xl font-bold text-foreground">Todos</h1>
+          <p className="text-muted-foreground mt-1">
             Lista de tareas desde JSONPlaceholder API
           </p>
         </div>

@@ -1,4 +1,4 @@
-import { Spinner } from './Spinner.tsx';
+import { Spinner } from './spinner.tsx';
 import type { LoadingProps } from '@/shared/types';
 
 export function Loading({
@@ -6,7 +6,7 @@ export function Loading({
   fullScreen = false,
 }: LoadingProps) {
   const containerClasses = fullScreen
-    ? 'fixed inset-0 bg-white/80 backdrop-blur-sm z-50'
+    ? 'fixed inset-0 bg-background/80 backdrop-blur-sm z-50'
     : 'w-full py-12';
 
   return (
@@ -14,7 +14,7 @@ export function Loading({
       className={`flex flex-col items-center justify-center gap-4 ${containerClasses}`}
     >
       <Spinner size="lg" />
-      <p className="text-gray-600 font-medium">{text}</p>
+      <p className="text-muted-foreground font-medium">{text}</p>
     </div>
   );
 }

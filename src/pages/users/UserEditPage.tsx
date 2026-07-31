@@ -41,8 +41,8 @@ export function UserEditPage() {
           <FiArrowLeft className="h-5 w-5" />
         </Button>
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Editar Usuario</h1>
-          <p className="text-gray-600 mt-1">
+          <h1 className="text-3xl font-bold text-foreground">Editar Usuario</h1>
+          <p className="text-muted-foreground mt-1">
             Modificar información de {user.name}
           </p>
         </div>
@@ -53,7 +53,9 @@ export function UserEditPage() {
           <CardTitle>Información del Usuario</CardTitle>
         </CardHeader>
         <CardContent>
-          <p className="text-gray-500">Formulario de edición (próximamente)</p>
+          <p className="text-muted-foreground">
+            Formulario de edición (próximamente)
+          </p>
         </CardContent>
       </Card>
     </div>

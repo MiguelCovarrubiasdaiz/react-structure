@@ -41,8 +41,8 @@ export function TodoEditPage() {
           <FiArrowLeft className="h-5 w-5" />
         </Button>
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Editar Tarea</h1>
-          <p className="text-gray-600 mt-1">Modificar: {todo.title}</p>
+          <h1 className="text-3xl font-bold text-foreground">Editar Tarea</h1>
+          <p className="text-muted-foreground mt-1">Modificar: {todo.title}</p>
         </div>
       </div>
 
@@ -51,7 +51,9 @@ export function TodoEditPage() {
           <CardTitle>Información de la Tarea</CardTitle>
         </CardHeader>
         <CardContent>
-          <p className="text-gray-500">Formulario de edición (próximamente)</p>
+          <p className="text-muted-foreground">
+            Formulario de edición (próximamente)
+          </p>
         </CardContent>
       </Card>
     </div>

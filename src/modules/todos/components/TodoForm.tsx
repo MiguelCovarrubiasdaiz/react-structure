@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Button, Input } from '@/shared/components';
+import { Button, Input, Label } from '@/shared/components';
 import { createTodoSchema, type CreateTodoFormData } from '../schemas';
 import { useCreateTodo } from '../hooks';
 import type { TodoFormProps } from '../types';
@@ -33,12 +33,20 @@ export function TodoForm({ userId = '1', onSuccess }: TodoFormProps) {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-      <Input
-        label="Título"
-        placeholder="Ej: Comprar leche"
-        error={errors.title?.message}
-        {...register('title')}
-      />
+      <div className="flex flex-col gap-1.5">
+        <Label htmlFor="title">Título</Label>
+        <Input
+          id="title"
+          placeholder="Ej: Comprar leche"
+          aria-invalid={!!errors.title}
+          {...register('title')}
+        />
+        {errors.title && (
+          <span className="text-sm text-destructive">
+            {errors.title.message}
+          </span>
+        )}
+      </div>
 
       <input type="hidden" {...register('userId')} />
 

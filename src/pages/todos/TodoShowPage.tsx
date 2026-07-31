@@ -43,10 +43,10 @@ export function TodoShowPage() {
             <FiArrowLeft className="h-5 w-5" />
           </Button>
           <div>
-            <h1 className="text-3xl font-bold text-gray-900">
+            <h1 className="text-3xl font-bold text-foreground">
               Detalle de Tarea
             </h1>
-            <p className="text-gray-600 mt-1">Información completa</p>
+            <p className="text-muted-foreground mt-1">Información completa</p>
           </div>
         </div>
         <Link to={`/todos/${id}/edit`}>
@@ -67,19 +67,19 @@ export function TodoShowPage() {
                 'flex h-10 w-10 items-center justify-center rounded-full',
                 todo.completed
                   ? 'bg-green-100 text-green-600'
-                  : 'bg-gray-100 text-gray-600'
+                  : 'bg-muted text-muted-foreground'
               )}
             >
               <FiCheckSquare className="h-5 w-5" />
             </div>
             <div>
-              <p className="text-sm text-gray-500">Título</p>
+              <p className="text-sm text-muted-foreground">Título</p>
               <p
                 className={cn(
                   'font-medium',
                   todo.completed
-                    ? 'text-gray-400 line-through'
-                    : 'text-gray-900'
+                    ? 'text-muted-foreground line-through'
+                    : 'text-foreground'
                 )}
               >
                 {todo.title}
@@ -88,7 +88,7 @@ export function TodoShowPage() {
           </div>
 
           <div className="pt-2 border-t">
-            <p className="text-sm text-gray-500">Estado</p>
+            <p className="text-sm text-muted-foreground">Estado</p>
             <span
               className={cn(
                 'inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium mt-1',

@@ -19,8 +19,8 @@ export function TodoCreatePage() {
           <FiArrowLeft className="h-5 w-5" />
         </Button>
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Crear Tarea</h1>
-          <p className="text-gray-600 mt-1">Agrega una nueva tarea</p>
+          <h1 className="text-3xl font-bold text-foreground">Crear Tarea</h1>
+          <p className="text-muted-foreground mt-1">Agrega una nueva tarea</p>
         </div>
       </div>
 

@@ -23,10 +23,10 @@ export function HomePage() {
   return (
     <div className="space-y-8">
       <div className="text-center">
-        <h1 className="text-4xl font-bold text-gray-900 mb-4">
+        <h1 className="text-4xl font-bold text-foreground mb-4">
           Structure React
         </h1>
-        <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+        <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
           Una arquitectura profesional para proyectos React con TypeScript,
           Tailwind CSS, Zustand, TanStack Query y Jest.
         </p>
@@ -36,13 +36,13 @@ export function HomePage() {
         {features.map((feature) => (
           <Card key={feature.title} className="text-center">
             <CardHeader>
-              <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-blue-100 text-blue-600">
+              <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 text-primary">
                 {feature.icon}
               </div>
               <CardTitle>{feature.title}</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-gray-600">{feature.description}</p>
+              <p className="text-muted-foreground">{feature.description}</p>
             </CardContent>
           </Card>
         ))}
@@ -53,7 +53,7 @@ export function HomePage() {
           <CardTitle>Estructura del Proyecto</CardTitle>
         </CardHeader>
         <CardContent>
-          <pre className="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto text-sm">
+          <pre className="bg-foreground text-background p-4 rounded-lg overflow-x-auto text-sm">
             {`src/
 ├── shared/                  # Recursos compartidos
 │   ├── assets/              # estilos, imágenes

@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Button, Input } from '@/shared/components';
+import { Button, Input, Label } from '@/shared/components';
 import { createUserSchema, type CreateUserFormData } from '../schemas';
 import { useCreateUser } from '../hooks';
 import type { UserFormProps } from '../types';
@@ -33,20 +33,36 @@ export function UserForm({ onSuccess }: UserFormProps) {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-      <Input
-        label="Nombre"
-        placeholder="John Doe"
-        error={errors.name?.message}
-        {...register('name')}
-      />
+      <div className="flex flex-col gap-1.5">
+        <Label htmlFor="name">Nombre</Label>
+        <Input
+          id="name"
+          placeholder="John Doe"
+          aria-invalid={!!errors.name}
+          {...register('name')}
+        />
+        {errors.name && (
+          <span className="text-sm text-destructive">
+            {errors.name.message}
+          </span>
+        )}
+      </div>
 
-      <Input
-        label="Email"
-        type="email"
-        placeholder="john@example.com"
-        error={errors.email?.message}
-        {...register('email')}
-      />
+      <div className="flex flex-col gap-1.5">
+        <Label htmlFor="email">Email</Label>
+        <Input
+          id="email"
+          type="email"
+          placeholder="john@example.com"
+          aria-invalid={!!errors.email}
+          {...register('email')}
+        />
+        {errors.email && (
+          <span className="text-sm text-destructive">
+            {errors.email.message}
+          </span>
+        )}
+      </div>
 
       <Button
         type="submit"

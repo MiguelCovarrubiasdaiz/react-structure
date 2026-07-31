@@ -7,7 +7,7 @@ export function Header() {
   const { theme, toggleTheme, toggleSidebar } = useAppStore();
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-gray-200 bg-white/95 backdrop-blur">
+    <header className="sticky top-0 z-40 w-full border-b border-border bg-background/95 backdrop-blur">
       <div className="flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
         <div className="flex items-center gap-4">
           <Button
@@ -18,7 +18,7 @@ export function Header() {
           >
             <FiMenu className="h-5 w-5" />
           </Button>
-          <h1 className="text-xl font-bold text-gray-900">{APP_NAME}</h1>
+          <h1 className="text-xl font-bold text-foreground">{APP_NAME}</h1>
         </div>
 
         <div className="flex items-center gap-2">

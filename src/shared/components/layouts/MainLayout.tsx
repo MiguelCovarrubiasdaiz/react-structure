@@ -8,7 +8,7 @@ export function MainLayout() {
   const { sidebarOpen } = useAppStore();
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-background">
       <Header />
       <Sidebar />
       <main

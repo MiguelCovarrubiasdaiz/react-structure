@@ -20,7 +20,7 @@ export function TodoList() {
   if (!todos?.length) {
     return (
       <div className="text-center py-12">
-        <p className="text-gray-500">No todos found</p>
+        <p className="text-muted-foreground">No todos found</p>
       </div>
     );
   }

@@ -20,7 +20,7 @@ export function UserList() {
   if (!users?.length) {
     return (
       <div className="text-center py-12">
-        <p className="text-gray-500">No users found</p>
+        <p className="text-muted-foreground">No users found</p>
       </div>
     );
   }
